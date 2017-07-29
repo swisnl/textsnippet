@@ -2,16 +2,13 @@
 
 namespace Swis;
 
-/**
- * Class TextSnippet
- */
 class TextSnippet
 {
-    protected static $specialChars = ['Â', 'Ã', 'Ä', 'À', 'Á', 'Å', 'Æ', 'Ç', 'È', 'É', 'Ê', 'Ë', 'Ì', 'Í', 'Î', 'Ï', 'Ð', 'Ñ', 'Ò', 'Ó', 'Ô', 'Õ', 'Ö', 'Ø', 'Ù', 'Ú', 'Û', 'Ü', 'Ý', 'Þ', 'ß', 'à', 'á', 'â', 'ã', 'ä', 'å', 'æ', 'ç', 'è', 'é', 'ê', 'ë', 'ì', 'í', 'î', 'ï', 'ð', 'ñ', 'ò', 'ó', 'ô', 'õ', 'ö', 'ø', 'ù', 'ú', 'û', 'ü', 'ý', 'þ', 'ÿ', 1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
-    protected static $specialReplaces = ['A', 'A', 'A', 'A', 'A', 'A', 'E', 'C', 'E', 'E', 'E', 'E', 'I', 'I', 'I', 'I', 'D', 'N', 'O', 'O', 'O', 'O', 'O', 'O', 'U', 'U', 'U', 'U', 'Y', 'P', 'B', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'c', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'i', 'o', 'n', 'o', 'o', 'o', 'o', 'o', 'o', 'u', 'u', 'u', 'u', 'y', 'b', 'y', 1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
-    protected static $highlightTemplate = '<span class="highlighted">%word%</span>';
-    protected static $minWords = 30;
-    protected static $maxWords = 100;
+    protected $specialChars = ['Â', 'Ã', 'Ä', 'À', 'Á', 'Å', 'Æ', 'Ç', 'È', 'É', 'Ê', 'Ë', 'Ì', 'Í', 'Î', 'Ï', 'Ð', 'Ñ', 'Ò', 'Ó', 'Ô', 'Õ', 'Ö', 'Ø', 'Ù', 'Ú', 'Û', 'Ü', 'Ý', 'Þ', 'ß', 'à', 'á', 'â', 'ã', 'ä', 'å', 'æ', 'ç', 'è', 'é', 'ê', 'ë', 'ì', 'í', 'î', 'ï', 'ð', 'ñ', 'ò', 'ó', 'ô', 'õ', 'ö', 'ø', 'ù', 'ú', 'û', 'ü', 'ý', 'þ', 'ÿ', 1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+    protected $specialReplaces = ['A', 'A', 'A', 'A', 'A', 'A', 'E', 'C', 'E', 'E', 'E', 'E', 'I', 'I', 'I', 'I', 'D', 'N', 'O', 'O', 'O', 'O', 'O', 'O', 'U', 'U', 'U', 'U', 'Y', 'P', 'B', 'a', 'a', 'a', 'a', 'a', 'a', 'a', 'c', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'i', 'o', 'n', 'o', 'o', 'o', 'o', 'o', 'o', 'u', 'u', 'u', 'u', 'y', 'b', 'y', 1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
+    protected $highlightTemplate = '<span class="highlighted">%word%</span>';
+    protected $minWords = 30;
+    protected $maxWords = 100;
 
     /**
      * Break a text into sentences
@@ -19,7 +16,7 @@ class TextSnippet
      * @param string $text
      * @return array
      */
-    public static function breakIntoSentences(string $text): array
+    public function breakIntoSentences(string $text): array
     {
         return preg_split('/(?<=[.?!;:])\s+/', $text, -1, PREG_SPLIT_NO_EMPTY);
     }
@@ -29,9 +26,9 @@ class TextSnippet
      *
      * @param int $minWords
      */
-    public static function setMinWords(int $minWords)
+    public function setMinWords(int $minWords)
     {
-        self::$minWords = $minWords;
+        $this->minWords = $minWords;
     }
 
     /**
@@ -39,9 +36,9 @@ class TextSnippet
      *
      * @param int $maxWords
      */
-    public static function setMaxWords(int $maxWords)
+    public function setMaxWords(int $maxWords)
     {
-        self::$maxWords = (int)$maxWords;
+        $this->maxWords = (int)$maxWords;
     }
 
     /**
@@ -52,13 +49,13 @@ class TextSnippet
      * @param array $sentences
      * @return array
      */
-    protected static function getMatchedSentences(string $query, array $sentences): array
+    protected function getMatchedSentences(string $query, array $sentences): array
     {
-        $queryWords = str_word_count($query, 1, implode('', self::$specialChars));
+        $queryWords = str_word_count($query, 1, implode('', $this->specialChars));
         $matchedSentences = [];
         foreach ($queryWords as $word) {
             foreach ($sentences as $key => $sentence) {
-                if (preg_match('/\b' . preg_quote(str_replace(self::$specialChars, self::$specialReplaces, $word)) . '\b/i', str_replace(self::$specialChars, self::$specialReplaces, $sentence))) {
+                if (preg_match('/\b' . preg_quote(str_replace($this->specialChars, $this->specialReplaces, $word)) . '\b/i', str_replace($this->specialChars, $this->specialReplaces, $sentence))) {
                     // if word is matched in this sentence (word boundary)
                     $matchedSentences[$key] = $sentence;
                 }
@@ -72,14 +69,14 @@ class TextSnippet
      * Set the template for the highlighting, for example '<em>%word%</em>'
      *
      * @param string $template
-     * @throws RuntimeException
+     * @throws \RuntimeException
      */
-    public static function setHighlightTemplate(string $template)
+    public function setHighlightTemplate(string $template)
     {
         if (strpos($template, '%word%') === false) {
             throw new \RuntimeException('HighlightTemplate should contain "%word%"');
         }
-        self::$highlightTemplate = $template;
+        $this->highlightTemplate = $template;
     }
 
     /**
@@ -89,17 +86,17 @@ class TextSnippet
      * @param string $text
      * @return string
      */
-    public static function highlightMatches(string $query, string $text): string
+    public function highlightMatches(string $query, string $text): string
     {
-        $queryWords = str_word_count($query, 1, implode('', self::$specialChars));
-        $snippetWords = str_word_count(str_replace('-', ' ', $text), 1, implode('', self::$specialChars));
+        $queryWords = str_word_count($query, 1, implode('', $this->specialChars));
+        $snippetWords = str_word_count(str_replace('-', ' ', $text), 1, implode('', $this->specialChars));
         $replaces = [];
         foreach ($queryWords as $word) {
             foreach ($snippetWords as $snippetWord) {
                 // case-insensitive matching. accent-insensitive matching
-                if (strtolower(str_replace(self::$specialChars, self::$specialReplaces, $word)) ==
-                    strtolower(str_replace(self::$specialChars, self::$specialReplaces, $snippetWord))) {
-                    $replaces['/\b' . preg_quote($snippetWord) . '\b/'] = str_replace('%word%', $snippetWord, self::$highlightTemplate);
+                if (strtolower(str_replace($this->specialChars, $this->specialReplaces, $word)) ==
+                    strtolower(str_replace($this->specialChars, $this->specialReplaces, $snippetWord))) {
+                    $replaces['/\b' . preg_quote($snippetWord) . '\b/'] = str_replace('%word%', $snippetWord, $this->highlightTemplate);
                 }
             }
         }
@@ -114,18 +111,18 @@ class TextSnippet
      * @param bool $highlight
      * @return string
      */
-    public static function createSnippet(string $query, string $text, bool $highlight = true)
+    public function createSnippet(string $query, string $text, bool $highlight = true)
     {
         $query = htmlspecialchars($query);
         $text = strip_tags($text);
-        $sentences = self::breakIntoSentences($text);
-        $matchedSentences = self::getMatchedSentences($query, $sentences);
+        $sentences = $this->breakIntoSentences($text);
+        $matchedSentences = $this->getMatchedSentences($query, $sentences);
         $result = '';
         $wordCounter = 0;
         $lastKey = key($matchedSentences) - 1;
         foreach ($matchedSentences as $key => $sentence) {
-            $wordCounter += str_word_count($sentence, 0, implode('', self::$specialChars));
-            if ($wordCounter < self::$maxWords || $result === '') {
+            $wordCounter += str_word_count($sentence, 0, implode('', $this->specialChars));
+            if ($wordCounter < $this->maxWords || $result === '') {
                 if ($key != $lastKey + 1) {
                     // if this sentence is not the next sentence, add ' ... '
                     $result .= ' ...';
@@ -136,23 +133,23 @@ class TextSnippet
         }
 
         // Matched text is smaller than [minWords]. Try to add next sentences
-        while ($wordCounter < self::$minWords && isset($sentences[$lastKey + 1]) && str_word_count($sentences[$lastKey + 1], 0, implode('', self::$specialChars)) + $wordCounter < self::$maxWords) {
+        while ($wordCounter < $this->minWords && isset($sentences[$lastKey + 1]) && str_word_count($sentences[$lastKey + 1], 0, implode('', $this->specialChars)) + $wordCounter < $this->maxWords) {
             $result .= ' ' . $sentences[$lastKey + 1];
-            $wordCounter += str_word_count($sentences[$lastKey + 1], 0, implode('', self::$specialChars));
+            $wordCounter += str_word_count($sentences[$lastKey + 1], 0, implode('', $this->specialChars));
             $lastKey++;
         }
 
         // Matched text is possibly still to small. Try to add sentences before the first sentence
         $firstKey = key($matchedSentences);
-        while ($wordCounter < self::$minWords && isset($sentences[$firstKey - 1]) && str_word_count($sentences[$firstKey - 1], 0, implode('', self::$specialChars)) + $wordCounter < self::$maxWords) {
+        while ($wordCounter < $this->minWords && isset($sentences[$firstKey - 1]) && str_word_count($sentences[$firstKey - 1], 0, implode('', $this->specialChars)) + $wordCounter < $this->maxWords) {
             // add this sentence before the current result
             $result = $sentences[$firstKey - 1] . ' ' . $result;
-            $wordCounter += str_word_count($sentences[$firstKey - 1], 0, implode('', self::$specialChars));
+            $wordCounter += str_word_count($sentences[$firstKey - 1], 0, implode('', $this->specialChars));
             $firstKey--;
         }
 
         if ($highlight === true) {
-            return self::highlightMatches($query, trim($result));
+            return $this->highlightMatches($query, trim($result));
         }
 
         return trim($result);

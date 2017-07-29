@@ -19,7 +19,8 @@ Some examples based on a 3 paragraph long Lorum ipsum text.
 ### Basic usage
 
 ```php 
-Swis\TextSnippet::createSnippet('Lorem', $lorumIpsum);
+$snippet = new TextSnippet()
+$snippet->createSnippet('Lorem', $lorumIpsum);
 ```
 
 Will result in:
@@ -33,7 +34,8 @@ Will result in:
 You can set the tags surrounding the highlighted text. The `%word%` tag is required.
 
 ```php 
-Swis\TextSnippet::setHighlightTemplate('<strong>%word%</strong>')
+$snippet = new TextSnippet()
+$snippet->setHighlightTemplate('<strong>%word%</strong>')
 ```
 
 ### Setting min and max words
@@ -49,8 +51,9 @@ $maxWords = 100;
 Setting min and max words. 
 
 ```php
-TextSnippet::setMinWords(10);
-TextSnippet::setMaxWords(30);
+$snippet = new TextSnippet()
+$snippet->setMinWords(10);
+$snippet->setMaxWords(30);
 ```
 
 There is a known issue if you set min and max very close to eachother. It might not find the correct set of words/sentences to get exactly between the small gap.

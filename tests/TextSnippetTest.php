@@ -23,27 +23,32 @@ Cras sit amet augue malesuada, elementum ipsum tempor, volutpat erat. Fusce orci
 
     public function testCorrectSnippets()
     {
-        $result = TextSnippet::createSnippet('Lorem', $this->lorumIpsum);
+        $snippet = new TextSnippet();
+        $result = $snippet->createSnippet('Lorem', $this->lorumIpsum);
         $this->assertEquals('<span class="highlighted">Lorem</span> ipsum dolor sit amet, consectetur adipiscing elit. ... Etiam bibendum <span class="highlighted">lorem</span> nec tempus sollicitudin. ... Sed in dapibus <span class="highlighted">lorem</span>. ... Nunc turpis ipsum, bibendum quis sodales sed, ullamcorper et <span class="highlighted">lorem</span>. Donec et metus hendrerit, interdum elit ut, dignissim dui.', $result);
     }
 
     public function testCorrectHighlight()
     {
-        TextSnippet::setHighlightTemplate('<test>%word%</test>');
-        $result = TextSnippet::createSnippet('ultrices', $this->lorumIpsum);
+        $snippet = new TextSnippet();
+        $snippet->setHighlightTemplate('<test>%word%</test>');
+        $result = $snippet->createSnippet('ultrices', $this->lorumIpsum);
 
         $this->assertEquals('Ut faucibus at nulla a <test>ultrices</test>. ... Nullam <test>ultrices</test> magna ut porta pellentesque. ... Fusce orci quam, faucibus non sem nec, tempor <test>ultrices</test> nibh. Mauris non pharetra leo. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', $result);
     }
 
     public function testCorrectDisabledHighlight()
     {
-        $result = TextSnippet::createSnippet('ultrices', $this->lorumIpsum, false);
+        $snippet = new TextSnippet();
+        $result = $snippet->createSnippet('ultrices', $this->lorumIpsum, false);
         $this->assertEquals('Ut faucibus at nulla a ultrices. ... Nullam ultrices magna ut porta pellentesque. ... Fusce orci quam, faucibus non sem nec, tempor ultrices nibh. Mauris non pharetra leo. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', $result);
     }
 
     public function testWordVariableIsRequired(){
         $this->expectException('RuntimeException');
-        TextSnippet::setHighlightTemplate('my broken template');
+
+        $snippet = new TextSnippet();
+        $snippet->setHighlightTemplate('my broken template');
     }
 
     public function minMaxWordsProvider()
@@ -63,9 +68,10 @@ Cras sit amet augue malesuada, elementum ipsum tempor, volutpat erat. Fusce orci
      */
     public function testMinAndMax($minWords, $maxWords)
     {
-        TextSnippet::setMinWords($minWords);
-        TextSnippet::setMaxWords($maxWords);
-        $result = TextSnippet::createSnippet('urna', $this->lorumIpsum, false);
+        $snippet = new TextSnippet();
+        $snippet->setMinWords($minWords);
+        $snippet->setMaxWords($maxWords);
+        $result = $snippet->createSnippet('urna', $this->lorumIpsum, false);
         $this->assertGreaterThan($minWords, str_word_count($result, 0, implode('', $this->specialChars)));
         $this->assertLessThan($maxWords, str_word_count($result, 0, implode('', $this->specialChars)));
     }
