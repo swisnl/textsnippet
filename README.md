@@ -15,9 +15,9 @@ TextSnippet::createSnippet('Lorem', $lorumIpsum);
 
 Will result in:
 
-```html
-<span class="highlighted">Lorem</span> ipsum dolor sit amet, consectetur adipiscing elit. ... Etiam bibendum <span class="highlighted">lorem</span> nec tempus sollicitudin. ... Sed in dapibus <span class="highlighted">lorem</span>. ... Nunc turpis ipsum, bibendum quis sodales sed, ullamcorper et <span class="highlighted">lorem</span>. Donec et metus hendrerit, interdum elit ut, dignissim dui.
-```
+
+**Lorem** ipsum dolor sit amet, consectetur adipiscing elit. ... Etiam bibendum **lorem** nec tempus sollicitudin. ... Sed in dapibus **lorem**. ... Nunc turpis ipsum, bibendum quis sodales sed, ullamcorper et **lorem**. Donec et metus hendrerit, interdum elit ut, dignissim dui.
+
 
 ### Setting highlight html
 
