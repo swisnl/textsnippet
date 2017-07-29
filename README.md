@@ -4,6 +4,14 @@ Easy and fast way to create a snippet of text, for example for a search result. 
 
 [![Build Status](https://travis-ci.org/swisnl/textsnippet.svg?branch=master)](https://travis-ci.org/swisnl/textsnippet) [![Latest Stable Version](https://poser.pugx.org/swisnl/textsnippet/v/stable)](https://packagist.org/packages/swisnl/textsnippet) [![License](https://poser.pugx.org/swisnl/textsnippet/license)](https://packagist.org/packages/swisnl/textsnippet)
 
+
+## Installation
+
+Just use composer to install the package. Or download and include the `TextSnipet.php` file.
+
+``composer require swisnl/textsnippet``
+
+
 ## Examples
 
 Some examples based on a 3 paragraph long Lorum ipsum text.
@@ -11,7 +19,7 @@ Some examples based on a 3 paragraph long Lorum ipsum text.
 ### Basic usage
 
 ```php 
-TextSnippet::createSnippet('Lorem', $lorumIpsum);
+Swis\TextSnippet::createSnippet('Lorem', $lorumIpsum);
 ```
 
 Will result in:
@@ -25,7 +33,7 @@ Will result in:
 You can set the tags surrounding the highlighted text. The `%word%` tag is required.
 
 ```php 
-TextSnippet::setHighlightTemplate('<strong>%word%</strong>')
+Swis\TextSnippet::setHighlightTemplate('<strong>%word%</strong>')
 ```
 
 ### Setting min and max words
