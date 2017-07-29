@@ -1,4 +1,5 @@
 <?php
+
 namespace Swis;
 
 /**
@@ -18,7 +19,7 @@ class TextSnippet
      * @param string $text
      * @return array
      */
-    public static function breakIntoSentences(string $text) : array
+    public static function breakIntoSentences(string $text): array
     {
         return preg_split('/(?<=[.?!;:])\s+/', $text, -1, PREG_SPLIT_NO_EMPTY);
     }
@@ -40,7 +41,7 @@ class TextSnippet
      */
     public static function setMaxWords(int $maxWords)
     {
-        self::$maxWords = (int) $maxWords;
+        self::$maxWords = (int)$maxWords;
     }
 
     /**
@@ -51,7 +52,7 @@ class TextSnippet
      * @param array $sentences
      * @return array
      */
-    protected static function getMatchedSentences(string $query, array $sentences) : array
+    protected static function getMatchedSentences(string $query, array $sentences): array
     {
         $queryWords = str_word_count($query, 1, implode('', self::$specialChars));
         $matchedSentences = [];
@@ -88,7 +89,7 @@ class TextSnippet
      * @param string $text
      * @return string
      */
-    public static function highlightMatches(string $query, string $text) : string
+    public static function highlightMatches(string $query, string $text): string
     {
         $queryWords = str_word_count($query, 1, implode('', self::$specialChars));
         $snippetWords = str_word_count(str_replace('-', ' ', $text), 1, implode('', self::$specialChars));
@@ -150,7 +151,7 @@ class TextSnippet
             $firstKey--;
         }
 
-        if($highlight === true){
+        if ($highlight === true) {
             return self::highlightMatches($query, trim($result));
         }
 
