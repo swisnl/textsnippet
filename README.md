@@ -1,6 +1,6 @@
 # SWIS Text Snippet
 
-Easy and fast way to create a snippet of text, for example for a search result. It will try and hightlight the given words and give you the relevant text around it.
+Easy and fast way to create a snippet of text, for example for a search result. It will try and highlight the given words and give you the relevant text around it.
 
 [![Build Status](https://travis-ci.org/swisnl/textsnippet.svg?branch=master)](https://travis-ci.org/swisnl/textsnippet) [![Latest Stable Version](https://poser.pugx.org/swisnl/textsnippet/v/stable)](https://packagist.org/packages/swisnl/textsnippet) [![License](https://poser.pugx.org/swisnl/textsnippet/license)](https://packagist.org/packages/swisnl/textsnippet)
 
