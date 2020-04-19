@@ -173,7 +173,7 @@ class TextSnippet
 		$matchedSentences = [];
 		foreach ($queryWords as $word) {
 			foreach ($sentences as $key => $sentence) {
-				if (preg_match('/\b' . preg_quote(str_replace($this->specialChars, $this->specialReplaces, $word)) . '\b/i', str_replace($this->specialChars, $this->specialReplaces, $sentence))) {
+				if (preg_match('/\b' . preg_quote(str_replace($this->specialChars, $this->specialReplaces, $word), '/') . '\b/i', str_replace($this->specialChars, $this->specialReplaces, $sentence))) {
 					// if word is matched in this sentence (word boundary)
 					$matchedSentences[$key] = $sentence;
 				}
