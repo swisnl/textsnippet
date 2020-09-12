@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tests;
+namespace Swis\TextSnippet\Tests;
 
 
 use PHPUnit\Framework\TestCase;
-use Swis\TextSnippet;
+use Swis\TextSnippet\TextSnippet;
 
 /**
  * @backupStaticAttributes disabled
