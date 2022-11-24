@@ -22,7 +22,7 @@ Some examples based on a 3 paragraph long Lorum ipsum text.
 ### Basic usage
 
 ```php
-$snippet = new TextSnippet()
+$snippet = new Swis\TextSnippet\TextSnippet();
 $snippet->createSnippet('Lorem', $lorumIpsum);
 ```
 
@@ -32,13 +32,27 @@ Will result in:
 **Lorem** ipsum dolor sit amet, consectetur adipiscing elit. ... Etiam bibendum **lorem** nec tempus sollicitudin. ... Sed in dapibus **lorem**. ... Nunc turpis ipsum, bibendum quis sodales sed, ullamcorper et **lorem**. Donec et metus hendrerit, interdum elit ut, dignissim dui.
 
 
+### For Laravel
+
+Add the source location to ``composer.json`` which adds the package to the composer autoload collection:
+```
+"autoload": {
+    "psr-4": {
+        "App\\": "app/", 
+        "Swis\\TextSnippet\\": "vendor/swisnl/textsnippet/src/"
+    }
+}
+```
+And run ``composer dump-autoload``
+
+
 ### Setting highlight html
 
 You can set the tags surrounding the highlighted text. The `%word%` tag is required.
 
 ```php
-$snippet = new TextSnippet()
-$snippet->setHighlightTemplate('<strong>%word%</strong>')
+$snippet = new Swis\TextSnippet\TextSnippet();
+$snippet->setHighlightTemplate('<strong>%word%</strong>');
 ```
 
 ### Setting min and max words
@@ -54,7 +68,7 @@ $maxWords = 100;
 Setting min and max words.
 
 ```php
-$snippet = new TextSnippet()
+$snippet = new Swis\TextSnippet\TextSnippet();
 $snippet->setMinWords(10);
 $snippet->setMaxWords(30);
 ```

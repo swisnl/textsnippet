@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Swis;
+namespace Swis\TextSnippet;
 
 class TextSnippet
 {
